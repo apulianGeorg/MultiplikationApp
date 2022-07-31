@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="@dimen/buttonWidthMain"
+        android:layout_height="@dimen/buttonHeightMain"
+        android:layout_marginTop="@dimen/marginBottomToTop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:inputType="textPersonName"
+        android:text="@string/Valentin"
+        android:hint="@string/name_text"
+        android:autofillHints="Namen eingeben"/>
+
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="@dimen/buttonWidthMain"
+        android:layout_height="@dimen/buttonHeightMain"
+        android:layout_marginTop="@dimen/field_distance"
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/result"
+        android:layout_width="@dimen/buttonWidthMain"
+        android:layout_height="@dimen/buttonHeightMain"
+        android:layout_marginTop="@dimen/field_distance"
+        app:layout_constraintTop_toBottomOf="@+id/question"
+        android:hint="@string/result_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:inputType="numberDecimal"
+        android:autofillHints="Ergebnis eingeben"/>
+
+    <Button
+        android:id="@+id/ok_button"
+        android:layout_width="@dimen/okButtonWidthMain"
+        android:layout_height="@dimen/okButtonHeightMain"
+        android:layout_marginBottom="@dimen/last_button_distance_bottom"
+        android:text="@string/OK"
+        android:textSize="@dimen/default_font_size"
+        app:layout_constraintBottom_toTopOf="@id/end_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/end_button"
+        android:layout_width="@dimen/okButtonWidthMain"
+        android:layout_height="@dimen/okButtonHeightMain"
+        android:layout_marginBottom="@dimen/last_button_distance_bottom"
+        android:text="@string/End"
+        android:textSize="@dimen/default_font_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

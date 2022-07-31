@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MultiplicazionApplication</string>
+    <string name="result_text">Ergebnis</string>
+    <string name="OK">OK</string>
+    <string name="End">Ende</string>
+    <string name="name_text">Spielername</string>
+    <string name="Valentin">Valentin</string>
+</resources>

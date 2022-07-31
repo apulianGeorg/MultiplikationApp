@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/design_default_color_background"
+    android:padding="@dimen/row_padding">
+
+    <!-- TeamName1-->
+    <TextView
+        android:id="@+id/high_score_name"
+        android:layout_width="@dimen/playerNameWidth"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="start"
+        android:textAlignment="textStart"
+        android:textSize="@dimen/default_font_size" />
+
+    <!-- TeamName2-->
+    <TextView
+        android:id="@+id/high_score_points"
+        android:layout_width="@dimen/points_length"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/high_score_name"
+        android:layout_marginLeft="@dimen/margin15"
+        android:gravity="end"
+        android:textAlignment="textEnd"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textSize="@dimen/default_font_size" />
+
+</RelativeLayout>
