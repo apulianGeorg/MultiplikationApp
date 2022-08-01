@@ -1,16 +1,15 @@
-package com.example.multiplicazionapplication.backend;
+package com.example.multiplicationapplication.model;
 
-import static com.example.multiplicazionapplication.Constants.FILENAME;
+import static com.example.multiplicationapplication.Constants.FILENAME;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class MyFileReader {
@@ -21,8 +20,11 @@ public class MyFileReader {
 
         String fileInput = readFileInput();
 
-        PlayerPoints[] playerPoints = mapper.readValue(fileInput, PlayerPoints[].class);
+        if (fileInput.length()==0){
+            return new ArrayList<>();
+        }
 
+        PlayerPoints[] playerPoints = mapper.readValue(fileInput, PlayerPoints[].class);
         return Arrays.asList(playerPoints);
     }
 

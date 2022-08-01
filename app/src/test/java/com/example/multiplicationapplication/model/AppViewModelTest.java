@@ -1,4 +1,4 @@
-package com.example.multiplicazionapplication.backend;
+package com.example.multiplicationapplication.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
@@ -7,8 +7,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-import com.example.multiplicazionapplication.Constants;
-import com.example.multiplicazionapplication.MainActivity;
+import com.example.multiplicationapplication.Constants;
+import com.example.multiplicationapplication.view.MainActivity;
+import com.example.multiplicationapplication.viewmodel.AppViewModel;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import org.junit.Before;
@@ -20,13 +21,13 @@ import org.mockito.internal.util.reflection.FieldSetter;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MultiplicationControllerTest {
+public class AppViewModelTest {
 
     @Mock
     MainActivity mainActivityMock;
 
     @InjectMocks
-    private MultiplicationController multiplicationController;
+    private AppViewModel appViewModel;
 
     ResultManager resultManager = new ResultManager();
     @Mock
@@ -36,11 +37,11 @@ public class MultiplicationControllerTest {
 
     @Before
     public void setup() throws NoSuchFieldException {
-        new FieldSetter(multiplicationController, multiplicationController.getClass().getDeclaredField("resultManager"))
+        new FieldSetter(appViewModel, appViewModel.getClass().getDeclaredField("resultManager"))
                 .set(resultManager);
-        new FieldSetter(multiplicationController, multiplicationController.getClass().getDeclaredField("mathService"))
+        new FieldSetter(appViewModel, appViewModel.getClass().getDeclaredField("mathService"))
                 .set(mathService);
-        new FieldSetter(multiplicationController, multiplicationController.getClass().getDeclaredField("highScoreFileManager"))
+        new FieldSetter(appViewModel, appViewModel.getClass().getDeclaredField("highScoreFileManager"))
                 .set(highScoreFileManager);
     }
 
@@ -49,7 +50,7 @@ public class MultiplicationControllerTest {
         when(mathService.getResult()).thenReturn(0.0);
         when(mainActivityMock.getResult()).thenReturn("1");
 
-        multiplicationController.okClicked();
+        appViewModel.okClicked();
 
         assertEquals(0, resultManager.getCorrectAnswers());
         assertEquals(1, resultManager.getFalseAnswers());
@@ -61,7 +62,7 @@ public class MultiplicationControllerTest {
         when(mathService.getResult()).thenReturn(0.0);
         when(mainActivityMock.getResult()).thenReturn("0");
 
-        multiplicationController.okClicked();
+        appViewModel.okClicked();
 
         assertEquals(1, resultManager.getCorrectAnswers());
         assertEquals(0, resultManager.getFalseAnswers());
@@ -77,8 +78,8 @@ public class MultiplicationControllerTest {
                 .thenReturn("1")
                 .thenReturn("0");
 
-        multiplicationController.okClicked();
-        multiplicationController.okClicked();
+        appViewModel.okClicked();
+        appViewModel.okClicked();
 
         assertEquals(1, resultManager.getCorrectAnswers());
         assertEquals(1, resultManager.getFalseAnswers());
@@ -90,7 +91,7 @@ public class MultiplicationControllerTest {
         String questionStr = "Hugo";
         when(mathService.getQuestion(Constants.MIN, Constants.MAX)).thenReturn(questionStr);
 
-        multiplicationController.setQuestion();
+        appViewModel.setQuestion();
 
         verify(mathService, times(1)).getQuestion(Constants.MIN, Constants.MAX);
         verify(mainActivityMock, times(1)).setQuestion(questionStr);
@@ -103,7 +104,7 @@ public class MultiplicationControllerTest {
         String playerName = "Hugo";
         when(mainActivityMock.getName()).thenReturn(playerName);
 
-        multiplicationController.endClicked();
+        appViewModel.endClicked();
 
         verify(highScoreFileManager, times(1)).savePlayerPoints(new PlayerPoints(playerName, 0));
         verify(mainActivityMock, times(1)).getName();

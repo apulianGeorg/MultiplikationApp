@@ -1,4 +1,4 @@
-package com.example.multiplicazionapplication;
+package com.example.multiplicationapplication;
 
 public class Constants {
     public static final int MIN = 1;

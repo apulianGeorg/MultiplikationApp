@@ -1,12 +1,13 @@
-package com.example.multiplicazionapplication.backend;
+package com.example.multiplicationapplication.model;
 
-import com.example.multiplicazionapplication.Constants;
+import com.example.multiplicationapplication.Constants;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 public class MyFileWriter {

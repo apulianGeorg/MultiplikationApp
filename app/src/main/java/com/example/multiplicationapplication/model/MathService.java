@@ -1,6 +1,4 @@
-package com.example.multiplicazionapplication.backend;
-
-import com.example.multiplicazionapplication.MainActivity;
+package com.example.multiplicationapplication.model;
 
 import java.util.Random;
 

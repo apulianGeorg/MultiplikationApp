@@ -1,13 +1,11 @@
-package com.example.multiplicazionapplication;
+package com.example.multiplicationapplication;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import com.example.multiplicazionapplication.backend.PlayerPoints;
+import com.example.multiplicationapplication.model.PlayerPoints;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.junit.Test;
 
 public class JacksonTest {
     //@Test

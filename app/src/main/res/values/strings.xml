@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MultiplicazionApplication</string>
+    <string name="app_name">MultiplicationApplication</string>
     <string name="result_text">Ergebnis</string>
     <string name="OK">OK</string>
     <string name="End">Ende</string>

@@ -1,4 +1,4 @@
-package com.example.multiplicazionapplication;
+package com.example.multiplicationapplication;
 
 import org.junit.Test;
 

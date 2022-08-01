@@ -1,4 +1,4 @@
-package com.example.multiplicazionapplication.backend;
+package com.example.multiplicationapplication.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

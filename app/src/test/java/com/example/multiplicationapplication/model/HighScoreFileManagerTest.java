@@ -1,4 +1,4 @@
-package com.example.multiplicazionapplication.backend;
+package com.example.multiplicationapplication.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;

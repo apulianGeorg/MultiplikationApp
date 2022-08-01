@@ -1,4 +1,4 @@
-package com.example.multiplicazionapplication.backend;
+package com.example.multiplicationapplication.model;
 
 public class ResultManager {
 

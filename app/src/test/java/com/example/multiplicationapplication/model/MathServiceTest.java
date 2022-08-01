@@ -1,14 +1,9 @@
-package com.example.multiplicazionapplication.backend;
+package com.example.multiplicationapplication.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import com.example.multiplicazionapplication.MainActivity;
-
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
 
 public class MathServiceTest {
     private final MathService mathService = new MathService();

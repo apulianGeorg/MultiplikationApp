@@ -1,13 +1,8 @@
-package com.example.multiplicazionapplication.backend;
-
-import androidx.annotation.NonNull;
+package com.example.multiplicationapplication.model;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,7 +21,8 @@ public class HighScoreFileManager {
         save(playerPointsList);
     }
 
-    public List<PlayerPoints> getPlayerPointsList() {
+    public List<PlayerPoints> getPlayerPointsList() throws JsonProcessingException {
+        playerPointsList = new ArrayList<>(myFileReader.readFile());
         if (playerPointsList == null) {
             return new ArrayList<>();
         }
