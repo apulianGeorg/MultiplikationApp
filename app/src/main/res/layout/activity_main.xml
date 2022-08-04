@@ -19,20 +19,50 @@
         android:background="#168BC34A"
         android:orientation="vertical">
 
+<!--        <ImageView
+            android:id="@+id/circle1"
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:contentDescription="@string/circle_description"
+            android:src="@{appViewModel.circle1}" />
+
+        <ImageView
+            android:id="@+id/circle2"
+            android:layout_width="16dp"
+            android:layout_height="@dimen/red_circle_size"
+            android:contentDescription="@string/circle_description"
+            android:src="@{appViewModel.circle2}"/>
+
+        <ImageView
+            android:id="@+id/circle3"
+            android:layout_width="16dp"
+            android:layout_height="@dimen/red_circle_size"
+            android:contentDescription="@string/circle_description"
+            android:src="@{appViewModel.circle3}"/>-->
+
+        <TextView
+            android:id="@+id/points"
+            android:layout_width="@dimen/points_field_width"
+            android:layout_height="@dimen/points_field_height"
+            android:layout_gravity="end"
+            android:textSize="@dimen/small_font_size"
+            app:layout_constraintTop_toBottomOf="parent"
+            android:text="@={appViewModel.pointsStr}"/>
+
         <EditText
             android:id="@+id/name"
             android:layout_width="@dimen/buttonWidthMain"
-            android:layout_height="@dimen/buttonHeightMain"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/marginBottomToTop"
             android:autofillHints="Namen eingeben"
             android:hint="@string/name_text"
             android:inputType="textPersonName"
+            android:text="@={appViewModel.playerName}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="@={appViewModel.playerName}"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/question"
@@ -61,26 +91,11 @@
             android:text="@={appViewModel.resultStr}"/>
 
         <Button
-            android:id="@+id/ok_button"
-            android:layout_width="@dimen/okButtonWidthMain"
-            android:layout_height="@dimen/okButtonHeightMain"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/last_button_distance_bottom"
-            android:layout_marginTop="@dimen/field_distance"
-            app:layout_constraintTop_toBottomOf="@+id/result"
-            android:onClick="@{()-> appViewModel.okClicked()}"
-            android:text="@string/OK"
-            android:textSize="@dimen/default_font_size"
-            app:layout_constraintBottom_toTopOf="@id/end_button" />
-
-        <Button
             android:id="@+id/end_button"
             android:layout_width="80dp"
-            android:layout_height="@dimen/okButtonHeightMain"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/last_button_distance_bottom"
-            android:layout_marginTop="@dimen/field_distance"
-            app:layout_constraintTop_toBottomOf="@+id/ok_button"
+            android:layout_marginVertical="@dimen/field_distance_end"
             android:text="@string/End"
             android:textSize="@dimen/default_font_size" />
 
