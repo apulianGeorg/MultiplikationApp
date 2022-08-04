@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         activityMainBinding.executePendingBindings();
 
         findViewById(R.id.end_button).setOnClickListener(this::endClicked);
+        ((EditText) findViewById(R.id.result)).setOnEditorActionListener((v, actionId, event) -> appViewModel.okClicked(actionId, event));
     }
 
     private void getReadAndWritePermission() {
@@ -41,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void endClicked(View view) {
+        //TODO Klären ob der resultStr noch gebraucht wird
         String results = appViewModel.getResults();
+        appViewModel.resetResults();
         Intent intent = new Intent(this, HighScoreActivity.class);
         intent.putExtra("results", results);
         startActivity(intent);

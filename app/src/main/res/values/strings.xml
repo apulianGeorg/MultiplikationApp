@@ -2,7 +2,8 @@
     <string name="app_name">MultiplicationApplication</string>
     <string name="result_text">Ergebnis</string>
     <string name="OK">OK</string>
-    <string name="End">Ende</string>
+    <string name="End">End</string>
     <string name="name_text">Spielername</string>
     <string name="Valentin">Valentin</string>
+    <string name="circle_description">A Circle that represents 1 life</string>
 </resources>

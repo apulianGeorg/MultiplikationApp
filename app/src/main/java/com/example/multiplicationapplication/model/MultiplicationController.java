@@ -6,45 +6,55 @@ import static com.example.multiplicationapplication.Constants.RESULT_STR;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-import java.util.List;
-
 public class MultiplicationController {
-    public static final int STARTUP_TIME = 2000;
-    private final long startMillis;
+
+    private long startMillis;
 
     private final MathService mathService;
     private final ResultManager resultManager;
     private final HighScoreFileManager highScoreFileManager;
 
     public MultiplicationController() {
-        startMillis = System.currentTimeMillis();
         mathService = new MathService();
         resultManager = new ResultManager();
         highScoreFileManager = new HighScoreFileManager();
     }
 
     public String evaluateResults(String playerName) throws JsonProcessingException {
-        long timeDuration = getTimeDuration();
         int correctAnswers = resultManager.getCorrectAnswers();
         int falseAnswers = resultManager.getFalseAnswers();
-        int points = resultManager.getPoints(timeDuration);
+        int points = resultManager.getPoints();
 
-        if (points > 0){
+        if (points > 0) {
             saveHighScore(points, playerName);
         }
 
         return java.text.MessageFormat.format(
-                RESULT_STR, timeDuration / 1000, correctAnswers, falseAnswers, points);
+                RESULT_STR, correctAnswers, falseAnswers, points);
+    }
+
+    public int getPoints() {
+        return resultManager.getPoints();
     }
 
     public String getQuestionStr() {
+        startMillis = System.currentTimeMillis();
         return mathService.getQuestion(MIN, MAX);
     }
 
-    public boolean isCorrectAnswer(String actualStr) {
+    public void evaluateAnswer(String resultStr) {
+        long timeDuration = getTimeDuration();
         double expected = mathService.getResult();
-        double actual = Double.parseDouble(actualStr);
-        return resultManager.isCorrectAnswer(actual, expected);
+        double actual = Double.parseDouble(resultStr);
+        resultManager.evaluateAnswer(actual, expected, timeDuration);
+    }
+
+    public boolean isCorrectAnswer() {
+        return resultManager.isCorrectAnswer();
+    }
+
+    public void resetResults() {
+        resultManager.reset();
     }
 
     private void saveHighScore(int points, String playerName) throws JsonProcessingException {
@@ -53,7 +63,7 @@ public class MultiplicationController {
     }
 
     private long getTimeDuration() {
-        return System.currentTimeMillis() - startMillis - STARTUP_TIME;
+        return System.currentTimeMillis() - startMillis;
     }
 }
 

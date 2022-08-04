@@ -4,10 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/admin/AndroidStudioProjects/MultiplicazionApplication/app/src/main/res/layout/activity_highscore.xml" value="0.1490036231884058" />
-        <entry key="..\:/Users/admin/AndroidStudioProjects/MultiplicazionApplication/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/MultiplicazionApplication/app/src/main/res/layout/activity_main.xml" value="0.11249259917110717" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/MultiplicazionApplication/app/src/main/res/layout/list_row_highscore.xml" value="0.17" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/MultiplicazionApplication/app/src/main/res/layout/listview.xml" value="0.1296875" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/MultiplicazionApplication/app/src/main/res/layout/popup.xml" value="0.10520833333333333" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/MultiplicazionApplication/app/src/main/res/layout/red_circle.xml" value="0.1" />
       </map>
     </option>
   </component>

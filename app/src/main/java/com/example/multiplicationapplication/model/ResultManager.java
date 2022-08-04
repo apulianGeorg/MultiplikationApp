@@ -1,38 +1,40 @@
 package com.example.multiplicationapplication.model;
 
+import lombok.Data;
+
+@Data
 public class ResultManager {
 
     private int correctAnswers = 0;
     private int falseAnswers = 0;
-    private final int estimatedTimePerQuestion = 7;
     private int points = 0;
+    private boolean isCorrectAnswer;
 
-    public boolean isCorrectAnswer(double expected, double actual) {
-        if (expected == actual) {
+    public void evaluateAnswer(double actual, double expected, long timeDuration) {
+        if (expected != actual) {
+            falseAnswers++;
+            setCorrectAnswer(false);
+        } else {
             correctAnswers++;
-            return true;
+            setCorrectAnswer(true);
         }
-        falseAnswers++;
-        return false;
+        calculatePoints(timeDuration);
     }
 
-    public int getPoints(long timeDuration) {
-        if (correctAnswers == 0){
-            return 0;
+    public void reset() {
+        points = 0;
+        falseAnswers = 0;
+        correctAnswers = 0;
+    }
+
+    private void calculatePoints(long timeDuration) {
+        if (isCorrectAnswer) {
+            int estimatedTimePerQuestion = 9000;
+            if (timeDuration < estimatedTimePerQuestion) {
+                points += (int) ((estimatedTimePerQuestion - timeDuration) / 1000L);
+            }
+        } else {
+            points = Math.max(--points, 0);
         }
-        long timePerQuestion = timeDuration / (1000 * correctAnswers);
-        long pointsPerQuestion = estimatedTimePerQuestion - timePerQuestion;
-        points = Math.max((int) ((pointsPerQuestion * correctAnswers) - 2 * falseAnswers), 0);
-        return points;
     }
-
-    public int getCorrectAnswers() {
-        return correctAnswers;
-    }
-
-    public int getFalseAnswers() {
-        return falseAnswers;
-    }
-
-
 }

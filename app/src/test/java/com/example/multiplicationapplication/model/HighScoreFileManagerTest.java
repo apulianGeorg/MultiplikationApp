@@ -33,7 +33,7 @@ public class HighScoreFileManagerTest {
     }
 
     @Test
-    public void getListWithoutSave() {
+    public void getListWithoutSave() throws JsonProcessingException {
         assertEquals(0, highScoreFileManager.getPlayerPointsList().size());
     }
 
