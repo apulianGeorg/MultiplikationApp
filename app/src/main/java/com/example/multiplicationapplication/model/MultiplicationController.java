@@ -20,17 +20,20 @@ public class MultiplicationController {
         highScoreFileManager = new HighScoreFileManager();
     }
 
-    public String evaluateResults(String playerName) throws JsonProcessingException {
+    public String getResultStr() throws JsonProcessingException {
         int correctAnswers = resultManager.getCorrectAnswers();
         int falseAnswers = resultManager.getFalseAnswers();
         int points = resultManager.getPoints();
 
+        return java.text.MessageFormat.format(
+                RESULT_STR, correctAnswers, falseAnswers, points);
+    }
+
+    public void saveResults(String playerName) throws JsonProcessingException {
+        int points = resultManager.getPoints();
         if (points > 0) {
             saveHighScore(points, playerName);
         }
-
-        return java.text.MessageFormat.format(
-                RESULT_STR, correctAnswers, falseAnswers, points);
     }
 
     public int getPoints() {
@@ -55,6 +58,10 @@ public class MultiplicationController {
 
     public void resetResults() {
         resultManager.reset();
+    }
+
+    public boolean hasNoMoreLife() {
+        return resultManager.getLife() == 0;
     }
 
     private void saveHighScore(int points, String playerName) throws JsonProcessingException {

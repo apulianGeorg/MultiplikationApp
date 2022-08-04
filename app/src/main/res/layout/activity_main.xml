@@ -41,6 +41,14 @@
             android:src="@{appViewModel.circle3}"/>-->
 
         <TextView
+            android:id="@+id/lifes"
+            android:layout_width="@dimen/points_field_width"
+            android:layout_height="@dimen/points_field_height"
+            android:layout_gravity="end"
+            android:textSize="@dimen/small_font_size"
+            android:text="@={appViewModel.lifeStr}"/>
+
+        <TextView
             android:id="@+id/points"
             android:layout_width="@dimen/points_field_width"
             android:layout_height="@dimen/points_field_height"
@@ -97,7 +105,8 @@
             android:layout_gravity="center"
             android:layout_marginVertical="@dimen/field_distance_end"
             android:text="@string/End"
-            android:textSize="@dimen/default_font_size" />
+            android:textSize="@dimen/default_font_size"
+            android:onClick="@{(v) ->appViewModel.endClicked(v)}"/>
 
     </LinearLayout>
 </layout>
