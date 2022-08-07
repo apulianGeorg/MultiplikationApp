@@ -1,6 +1,7 @@
 package com.example.multiplicationapplication.view;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 
@@ -15,7 +16,7 @@ import com.example.multiplicationapplication.viewmodel.AppViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final AppViewModel appViewModel = new AppViewModel();
+    private final AppViewModel appViewModel = new AppViewModel(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,19 +27,23 @@ public class MainActivity extends AppCompatActivity {
         activityMainBinding.setAppViewModel(appViewModel);
         activityMainBinding.executePendingBindings();
 
-        //TODO: Sollte auch in den AppViewModel wandern
         ((EditText) findViewById(R.id.result)).setOnEditorActionListener(
                 appViewModel::afterEditingResult);
     }
 
     private void getReadAndWritePermission() {
         ActivityCompat.requestPermissions(MainActivity.this,
-                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                1);
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
 
         ActivityCompat.requestPermissions(MainActivity.this,
-                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                1);
+                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        if (requestCode == 1) {
+            System.out.println("Hello");
+        }
+    }
 }

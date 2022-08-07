@@ -19,27 +19,6 @@
         android:background="#168BC34A"
         android:orientation="vertical">
 
-<!--        <ImageView
-            android:id="@+id/circle1"
-            android:layout_width="wrap_content"
-            android:layout_height="16dp"
-            android:contentDescription="@string/circle_description"
-            android:src="@{appViewModel.circle1}" />
-
-        <ImageView
-            android:id="@+id/circle2"
-            android:layout_width="16dp"
-            android:layout_height="@dimen/red_circle_size"
-            android:contentDescription="@string/circle_description"
-            android:src="@{appViewModel.circle2}"/>
-
-        <ImageView
-            android:id="@+id/circle3"
-            android:layout_width="16dp"
-            android:layout_height="@dimen/red_circle_size"
-            android:contentDescription="@string/circle_description"
-            android:src="@{appViewModel.circle3}"/>-->
-
         <TextView
             android:id="@+id/lifes"
             android:layout_width="@dimen/points_field_width"

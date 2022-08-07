@@ -6,4 +6,6 @@
     <string name="name_text">Spielername</string>
     <string name="Valentin">Valentin</string>
     <string name="circle_description">A Circle that represents 1 life</string>
+    <string name="calculator">Du hast den Status Mathetaschenrechner erreicht</string>
+    <string name="badgeImage">badgeImage</string>
 </resources>

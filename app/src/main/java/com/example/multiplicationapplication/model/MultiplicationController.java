@@ -2,7 +2,6 @@ package com.example.multiplicationapplication.model;
 
 import static com.example.multiplicationapplication.Constants.MAX;
 import static com.example.multiplicationapplication.Constants.MIN;
-import static com.example.multiplicationapplication.Constants.RESULT_STR;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -11,33 +10,26 @@ public class MultiplicationController {
     private long startMillis;
 
     private final MathService mathService;
-    private final ResultManager resultManager;
+    private final ResultService resultService;
     private final HighScoreFileManager highScoreFileManager;
+    private final BadgeService badgeService;
 
     public MultiplicationController() {
         mathService = new MathService();
-        resultManager = new ResultManager();
+        resultService = new ResultService();
         highScoreFileManager = new HighScoreFileManager();
-    }
-
-    public String getResultStr() throws JsonProcessingException {
-        int correctAnswers = resultManager.getCorrectAnswers();
-        int falseAnswers = resultManager.getFalseAnswers();
-        int points = resultManager.getPoints();
-
-        return java.text.MessageFormat.format(
-                RESULT_STR, correctAnswers, falseAnswers, points);
+        badgeService = new BadgeService();
     }
 
     public void saveResults(String playerName) throws JsonProcessingException {
-        int points = resultManager.getPoints();
+        int points = resultService.getPoints();
         if (points > 0) {
             saveHighScore(points, playerName);
         }
     }
 
-    public int getPoints() {
-        return resultManager.getPoints();
+    public String getPointsStr() {
+        return String.valueOf(resultService.getPoints());
     }
 
     public String getQuestionStr() {
@@ -45,23 +37,36 @@ public class MultiplicationController {
         return mathService.getQuestion(MIN, MAX);
     }
 
+
+    public boolean isValidAnswer(String resultStr) {
+        return null != resultStr && !"".equals(resultStr) && !".".equals(resultStr);
+    }
+
     public void evaluateAnswer(String resultStr) {
         long timeDuration = getTimeDuration();
         double expected = mathService.getResult();
         double actual = Double.parseDouble(resultStr);
-        resultManager.evaluateAnswer(actual, expected, timeDuration);
+        resultService.evaluateAnswer(actual, expected, timeDuration);
     }
 
     public boolean isCorrectAnswer() {
-        return resultManager.isCorrectAnswer();
+        return resultService.isCorrectAnswer();
     }
 
     public void resetResults() {
-        resultManager.reset();
+        resultService.reset();
     }
 
     public boolean hasNoMoreLife() {
-        return resultManager.getLife() == 0;
+        return resultService.getLife() == 0;
+    }
+
+    public Badge getNewBadge() {
+        return badgeService.getNewBadge(resultService.getPoints());
+    }
+
+    public String getLifeStr() {
+        return String.valueOf(resultService.getLife());
     }
 
     private void saveHighScore(int points, String playerName) throws JsonProcessingException {

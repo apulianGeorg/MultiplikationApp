@@ -3,7 +3,7 @@ package com.example.multiplicationapplication.model;
 import lombok.Data;
 
 @Data
-public class ResultManager {
+public class ResultService {
 
     private int correctAnswers = 0;
     private int falseAnswers = 0;
@@ -15,7 +15,7 @@ public class ResultManager {
         if (expected != actual) {
             falseAnswers++;
             setCorrectAnswer(false);
-            life --;
+            life--;
         } else {
             correctAnswers++;
             setCorrectAnswer(true);
@@ -31,13 +31,10 @@ public class ResultManager {
     }
 
     private void calculatePoints(long timeDuration) {
-        //if (isCorrectAnswer) {
-            int estimatedTimePerQuestion = 9000;
-            if (timeDuration < estimatedTimePerQuestion) {
-                points += (int) ((estimatedTimePerQuestion - timeDuration) / 1000L);
-            }
-        /*} else {
-            points = Math.max(--points, 0);
-        }*/
+        int estimatedTimePerQuestion = 9000;
+        if (timeDuration < estimatedTimePerQuestion) {
+            points += (int) ((estimatedTimePerQuestion - timeDuration) / 1000L);
+        }
+
     }
 }

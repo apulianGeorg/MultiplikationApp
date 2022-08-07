@@ -2,7 +2,6 @@ package com.example.multiplicationapplication.view;
 
 import android.os.Bundle;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,10 +24,6 @@ public class HighScoreActivity extends AppCompatActivity {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-
-        String results = getIntent().getStringExtra("results");
-        TextView resultTextView = findViewById(R.id.result);
-        resultTextView.setText(results);
     }
 
     private void bindAdapterToListView() throws JsonProcessingException {
