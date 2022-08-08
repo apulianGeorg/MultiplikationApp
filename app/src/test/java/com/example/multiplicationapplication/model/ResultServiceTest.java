@@ -7,48 +7,77 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class ResultServiceTest {
-    private ResultService resultService = new ResultService();
+    private final ResultService resultService = new ResultService();
 
     @Test
     public void initTest() {
+        resultService.reset();
         assertEquals(0, resultService.getCorrectAnswers());
         assertEquals(0, resultService.getFalseAnswers());
-        assertEquals(0, resultService.getPoints(10000));
-        assertEquals(0, resultService.getPoints(1000));
-    }
-
-
-    @Test
-    public void onlyFalseAnswersTest() {
-        assertFalse(resultService.isCorrectAnswer(0, 1));
-        assertFalse(resultService.isCorrectAnswer(0, 1));
-        assertFalse(resultService.isCorrectAnswer(0, 1));
-        assertEquals(0, resultService.getCorrectAnswers());
-        assertEquals(3, resultService.getFalseAnswers());
-        assertEquals(0, resultService.getPoints(10000));
+        assertEquals(0, resultService.getPoints());
+        assertEquals(5, resultService.getLife());
+        assertFalse(resultService.isCorrectAnswer());
     }
 
     @Test
-    public void onlyCorrectAnswersTest() {
-        assertTrue(resultService.isCorrectAnswer(1, 1));
-        assertTrue(resultService.isCorrectAnswer(1, 1));
-        assertTrue(resultService.isCorrectAnswer(1, 1));
-        assertEquals(3, resultService.getCorrectAnswers());
+    public void falseAnswersTest() {
+        resultService.reset();
+        resultService.evaluateAnswer(1, 2, 1000);
+        assertFalse(resultService.isCorrectAnswer());
+        assertEquals(1, resultService.getFalseAnswers());
+        assertEquals(0, resultService.getCorrectAnswers());
+        assertEquals(0, resultService.getPoints());
+        assertEquals(4, resultService.getLife());
+    }
+
+    @Test
+    public void correctAnswersTest() {
+        resultService.reset();
+        resultService.evaluateAnswer(1, 1, 1000);
+        assertTrue(resultService.isCorrectAnswer());
         assertEquals(0, resultService.getFalseAnswers());
-        assertEquals(12, resultService.getPoints(10000));
+        assertEquals(1, resultService.getCorrectAnswers());
+        assertEquals(8, resultService.getPoints());
+        assertEquals(5, resultService.getLife());
+    }
+
+    @Test
+    public void pointsTest() {
+        resultService.reset();
+        resultService.evaluateAnswer(1, 1, 999);
+        assertEquals(8, resultService.getPoints());
+
+        resultService.reset();
+        resultService.evaluateAnswer(1, 1, 4100);
+        assertEquals(4, resultService.getPoints());
+
+        resultService.reset();
+        resultService.evaluateAnswer(1, 1, 6600);
+        assertEquals(2, resultService.getPoints());
+
+        resultService.reset();
+        resultService.evaluateAnswer(1, 1, 8999);
+        assertEquals(0, resultService.getPoints());
+
+        resultService.reset();
+        resultService.evaluateAnswer(1, 1, 9000);
+        assertEquals(0, resultService.getPoints());
     }
 
     @Test
     public void mixedAnswersTest() {
-        assertTrue(resultService.isCorrectAnswer(1, 1));
-        assertTrue(resultService.isCorrectAnswer(1, 1));
-        assertTrue(resultService.isCorrectAnswer(1, 1));
-        assertFalse(resultService.isCorrectAnswer(0, 1));
-        assertTrue(resultService.isCorrectAnswer(1, 1));
-        assertFalse(resultService.isCorrectAnswer(0, 1));
+        resultService.reset();
+        resultService.evaluateAnswer(1, 1, 1000);
+        resultService.evaluateAnswer(1, 0, 1000);
+        resultService.evaluateAnswer(0, 1, 1000);
+        resultService.evaluateAnswer(1, 1, 6000);
+        resultService.evaluateAnswer(1, 0, 6000);
 
-        assertEquals(4, resultService.getCorrectAnswers());
-        assertEquals(2, resultService.getFalseAnswers());
-        assertEquals(16, resultService.getPoints(10000));
+        assertFalse(resultService.isCorrectAnswer());
+        assertEquals(3, resultService.getFalseAnswers());
+        assertEquals(2, resultService.getCorrectAnswers());
+        assertEquals(11, resultService.getPoints());
+        assertEquals(2, resultService.getLife());
     }
+
 }

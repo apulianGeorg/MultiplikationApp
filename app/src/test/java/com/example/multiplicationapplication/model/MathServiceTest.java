@@ -11,7 +11,7 @@ public class MathServiceTest {
     @Test
     public void testWithMinMaxOne() {
         String textMultiplication = "1 x 1 = ??? ";
-        String textDivision = "1 / 1 = ??? ";
+        String textDivision = "1 : 1 = ??? ";
         String result = mathService.getQuestion(1, 1);
         assertTrue("Expected: " + textMultiplication + '\n' +
                         "Expected: " + textDivision + '\n' +
@@ -30,14 +30,14 @@ public class MathServiceTest {
             int number1 = Integer.parseInt(questionArr[0]);
             String operator = questionArr[1];
             int number2 = Integer.parseInt(questionArr[2]);
-            assertTrue(question, "/".equals(operator) || "x".equals(operator));
+            assertTrue(question, ":".equals(operator) || "x".equals(operator));
             int result = getResult(number1, operator, number2);
             assertEquals(question, (double) mathService.getResult(), result, 0.0);
         }
     }
 
     private int getResult(int number1, String operator, int number2) {
-        if ("/".equals(operator)) {
+        if (":".equals(operator)) {
             return number1 / number2;
         } else {
             return number1 * number2;

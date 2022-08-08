@@ -1,16 +1,18 @@
 package com.example.multiplicationapplication.model;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.mockito.internal.util.reflection.FieldSetter;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class HighScoreFileManagerTest {
     private final HighScoreFileManager highScoreFileManager = new HighScoreFileManager();
@@ -19,7 +21,6 @@ public class HighScoreFileManagerTest {
 
     @Before
     public void init() throws NoSuchFieldException, JsonProcessingException {
-        String fileStr = "[{\"name\":\"Karl\",\"points\":3}]";
         PlayerPoints mockPlayer = new PlayerPoints("Karl", 3);
         ArrayList<PlayerPoints> mockPlayerList = new ArrayList<>();
         mockPlayerList.add(mockPlayer);
@@ -34,7 +35,9 @@ public class HighScoreFileManagerTest {
 
     @Test
     public void getListWithoutSave() throws JsonProcessingException {
-        assertEquals(0, highScoreFileManager.getPlayerPointsList().size());
+        assertEquals(1, highScoreFileManager.getPlayerPointsList().size());
+        assertEquals("Karl", highScoreFileManager.getPlayerPointsList().get(0).getName());
+        assertEquals(3, highScoreFileManager.getPlayerPointsList().get(0).getPoints());
     }
 
     @Test
@@ -46,10 +49,15 @@ public class HighScoreFileManagerTest {
     public void saveNotNull() throws JsonProcessingException {
         PlayerPoints playerPoints = new PlayerPoints("Hugo", 12);
         highScoreFileManager.savePlayerPoints(playerPoints);
-        assertEquals(2, highScoreFileManager.getPlayerPointsList().size());
-        assertEquals("Hugo", highScoreFileManager.getPlayerPointsList().get(0).getName());
-        assertEquals(12, highScoreFileManager.getPlayerPointsList().get(0).getPoints());
-        assertEquals("Karl", highScoreFileManager.getPlayerPointsList().get(1).getName());
-        assertEquals(3, highScoreFileManager.getPlayerPointsList().get(1).getPoints());
+        ArgumentCaptor<List> captor = ArgumentCaptor.forClass(List.class);
+        Mockito.verify(myFileWriterMock).writeToSDFile(captor.capture());
+        List<PlayerPoints> value = captor.getValue();
+        Collections.sort(value);
+
+        assertEquals(2, value.size());
+        assertEquals("Hugo", value.get(0).getName());
+        assertEquals(12, value.get(0).getPoints());
+        assertEquals("Karl", value.get(1).getName());
+        assertEquals(3, value.get(1).getPoints());
     }
 }
