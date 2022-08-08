@@ -7,9 +7,11 @@ public enum Badge {
     MATH_FOX(R.drawable.mathfox, "Du bist ein echter Mathefuchs", 100, 149),
     SCHLAUBI(R.drawable.schlaubi, "Dein Name ist Schlaubi", 150, 199),
     KING(R.drawable.king, "Du bist der Mathe König", 200, 299),
-    PROFESSOR(R.drawable.professor, "Du musst eine Mathe Professor sein", 300, 399),
-    EINSTEIN(R.drawable.einstein, "Du hast den Status Einstein erreicht", 400, 499),
-    SUPER_COMPUTER(R.drawable.supercomputer, "Du rechnest wie ein Supercomputer", 500, 999);
+    PROFESSOR(R.drawable.professor, "Du musst ein Mathe Professor sein", 300, 399),
+    CHECKER(R.drawable.matheverstanden, "Du checkst es einfach", 400, 499),
+    SMOKING_HEAD(R.drawable.rauchenderkopf, "Dir raucht der Kopf", 500, 599),
+    EINSTEIN(R.drawable.einstein, "Du hast den Status Einstein erreicht", 600, 699),
+    SUPER_COMPUTER(R.drawable.supercomputer, "Du rechnest wie ein Supercomputer", 700, 999);
 
     private final int file;
     private final String fileText;

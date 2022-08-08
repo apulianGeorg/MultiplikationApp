@@ -9,6 +9,9 @@ public class MultiplicationController {
 
     private long startMillis;
 
+    private static final String POINTS_PREFIX = "Punkte: ";
+    private static final String LIFE_PREFIX = "Leben: ";
+
     private final MathService mathService;
     private final ResultService resultService;
     private final HighScoreFileManager highScoreFileManager;
@@ -29,7 +32,7 @@ public class MultiplicationController {
     }
 
     public String getPointsStr() {
-        return String.valueOf(resultService.getPoints());
+        return POINTS_PREFIX + resultService.getPoints();
     }
 
     public String getQuestionStr() {
@@ -66,7 +69,7 @@ public class MultiplicationController {
     }
 
     public String getLifeStr() {
-        return String.valueOf(resultService.getLife());
+        return LIFE_PREFIX + resultService.getLife();
     }
 
     private void saveHighScore(int points, String playerName) throws JsonProcessingException {

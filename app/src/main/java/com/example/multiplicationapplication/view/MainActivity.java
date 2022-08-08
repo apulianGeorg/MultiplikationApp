@@ -8,6 +8,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.multiplicationapplication.R;
 import com.example.multiplicationapplication.databinding.ActivityMainBinding;
@@ -16,19 +17,17 @@ import com.example.multiplicationapplication.viewmodel.AppViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final AppViewModel appViewModel = new AppViewModel(this);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getReadAndWritePermission();
         super.onCreate(savedInstanceState);
 
         ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        activityMainBinding.setAppViewModel(appViewModel);
-        activityMainBinding.executePendingBindings();
+        AppViewModel appViewModel = new ViewModelProvider(this).get(AppViewModel.class);
+        activityMainBinding.setObserver(appViewModel.getObserver());
 
         ((EditText) findViewById(R.id.result)).setOnEditorActionListener(
-                appViewModel::afterEditingResult);
+                appViewModel.getObserver()::afterEditingResult);
     }
 
     private void getReadAndWritePermission() {
