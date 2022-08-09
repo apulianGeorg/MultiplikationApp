@@ -22,7 +22,7 @@ public class HighScoreFileManager {
     }
 
     public List<PlayerPoints> getPlayerPointsList() throws JsonProcessingException {
-        playerPointsList = new ArrayList<>(myFileReader.readFile());
+        playerPointsList = myFileReader.readFile();
         if (playerPointsList == null) {
             return new ArrayList<>();
         }

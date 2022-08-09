@@ -20,13 +20,7 @@ public class HighScoreFileManagerTest {
     private final MyFileReader myFileReaderMock = Mockito.mock(MyFileReader.class);
 
     @Before
-    public void init() throws NoSuchFieldException, JsonProcessingException {
-        PlayerPoints mockPlayer = new PlayerPoints("Karl", 3);
-        ArrayList<PlayerPoints> mockPlayerList = new ArrayList<>();
-        mockPlayerList.add(mockPlayer);
-
-        Mockito.when(myFileReaderMock.readFile()).thenReturn(mockPlayerList);
-
+    public void init() throws NoSuchFieldException {
         new FieldSetter(highScoreFileManager, highScoreFileManager.getClass().getDeclaredField("myFileReader"))
                 .set(myFileReaderMock);
         new FieldSetter(highScoreFileManager, highScoreFileManager.getClass().getDeclaredField("myFileWriter"))
@@ -35,6 +29,7 @@ public class HighScoreFileManagerTest {
 
     @Test
     public void getListWithoutSave() throws JsonProcessingException {
+        setupFileMock();
         assertEquals(1, highScoreFileManager.getPlayerPointsList().size());
         assertEquals("Karl", highScoreFileManager.getPlayerPointsList().get(0).getName());
         assertEquals(3, highScoreFileManager.getPlayerPointsList().get(0).getPoints());
@@ -47,6 +42,7 @@ public class HighScoreFileManagerTest {
 
     @Test
     public void saveNotNull() throws JsonProcessingException {
+        setupFileMock();
         PlayerPoints playerPoints = new PlayerPoints("Hugo", 12);
         highScoreFileManager.savePlayerPoints(playerPoints);
         ArgumentCaptor<List> captor = ArgumentCaptor.forClass(List.class);
@@ -59,5 +55,21 @@ public class HighScoreFileManagerTest {
         assertEquals(12, value.get(0).getPoints());
         assertEquals("Karl", value.get(1).getName());
         assertEquals(3, value.get(1).getPoints());
+    }
+
+    @Test
+    public void getPlayer_EmptyFile() throws JsonProcessingException {
+        Mockito.when(myFileReaderMock.readFile()).thenReturn(null);
+        List<PlayerPoints> playerPointsList = highScoreFileManager.getPlayerPointsList();
+
+        assertEquals(0, playerPointsList.size());
+    }
+
+    private void setupFileMock() throws JsonProcessingException {
+        PlayerPoints mockPlayer = new PlayerPoints("Karl", 3);
+        ArrayList<PlayerPoints> mockPlayerList = new ArrayList<>();
+        mockPlayerList.add(mockPlayer);
+
+        Mockito.when(myFileReaderMock.readFile()).thenReturn(mockPlayerList);
     }
 }
